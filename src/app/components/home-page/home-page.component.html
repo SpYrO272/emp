@@ -1,0 +1,112 @@
+
+    <div class="container-fluid" style="background-color: #FAFEDC;">
+        <div class="row pt-5">
+          <div class="col-md-3"></div>
+          <div class="col-md-6 ">
+            
+           <div class="d-flex justify-content-center">
+                <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="my-5 p-4 shadow border rounded w-50 " style="background-color: #BCF59F;">
+          
+                  <div class="my-2">
+                    <h1 class="text-center fw-bolder text-primary mb-4">User Details</h1>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      class="form-control shadow"
+                      formControlName="username"
+                      name="username"
+                    />
+                  
+                  </div>
+          
+                  <div class="mb-3 mt-3">
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      class="form-control shadow"
+                      formControlName="email"
+                      name="email"
+                    />
+                  </div>
+          
+        
+                  <div class="mb-3 mt-3">
+                    <input
+                      type="text"
+                      placeholder="Age"
+                      class="form-control shadow"
+                      formControlName="age"
+                      name="age"
+                    />
+                  </div>
+          
+                  <!-- User Status Dropdown -->
+                  <div class="mb-3 mt-3">
+                    <select
+                      name="Userstatus"
+                      class="form-control shadow"
+                      formControlName="Userstatus"
+                    >
+                      <option value="" disabled>Select Status</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </div>
+          
+                  <!-- Submit Button -->
+                  <div class="mb-3 mt-3 text-center">
+                    <button type="submit" class="btn btn-primary mt-3 w-25 p-2">
+                      {{ isEditMode ? 'Update User' : 'Add' }}
+                    </button>
+                  </div>
+                </form>
+           </div>
+      
+            <!-- User List -->
+            <h1 class="fw-bold text-center text-danger my-3">LIST</h1>
+            <select class="form-select my-5" (change)="onFilterChange($event)">
+                <option value="">Filter by Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+              
+              
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+      
+        <!-- User Table -->
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <table class="table table-bordered ">
+              <thead >
+                <tr >
+                  <th class="bg-primary text-light">Username</th>
+                  <th  class="bg-primary text-light">Email</th>
+                  <th  class="bg-primary text-light">Age</th>
+                  <th  class="bg-primary text-light">Status</th>
+                  <th  class="bg-primary text-light">Update</th>
+                  <th  class="bg-primary text-light">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of filteredUsers || []">
+                  <td style="background-color: bisque;">{{ user.username }}</td>
+                  <td style="background-color: bisque;">{{ user.email }}</td>
+                  <td style="background-color: bisque;">{{ user.age }}</td>
+                  <td style="background-color: bisque;">{{ user.Userstatus }}</td>
+                  <td style="background-color: bisque;">
+                    <button class="btn btn-sm btn-success w-100" (click)="editUser(user)">Edit</button>
+                  </td>
+                  <td style="background-color: bisque;">
+                    <button class="btn btn-sm btn-danger w-100" (click)="onDelete(user.id)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+      
